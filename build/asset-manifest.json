@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1504d910.chunk.css",
+    "main.js": "/static/js/main.04744e34.chunk.js",
+    "main.js.map": "/static/js/main.04744e34.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f30f1a29.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f30f1a29.js.map",
+    "static/js/2.6086c99f.chunk.js": "/static/js/2.6086c99f.chunk.js",
+    "static/js/2.6086c99f.chunk.js.map": "/static/js/2.6086c99f.chunk.js.map",
+    "static/js/3.86987877.chunk.js": "/static/js/3.86987877.chunk.js",
+    "static/js/3.86987877.chunk.js.map": "/static/js/3.86987877.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.1504d910.chunk.css.map": "/static/css/main.1504d910.chunk.css.map",
+    "static/js/2.6086c99f.chunk.js.LICENSE.txt": "/static/js/2.6086c99f.chunk.js.LICENSE.txt",
+    "static/media/Taskpage.scss": "/static/media/AllListImage.93f02141.jpg",
+    "static/media/AllTasks.scss": "/static/media/TaskCartoon.eaff52f0.png",
+    "static/media/Homepage.scss": "/static/media/homebg6.82a9f92d.jpg",
+    "static/media/Customcard.scss": "/static/media/note3.8d47eb35.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f30f1a29.js",
+    "static/js/2.6086c99f.chunk.js",
+    "static/css/main.1504d910.chunk.css",
+    "static/js/main.04744e34.chunk.js"
+  ]
+}
