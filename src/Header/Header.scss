@@ -1,0 +1,80 @@
+@keyframes HomeLinkAnimation {
+    0%{
+        transform: rotate(0);
+    }
+    30%{
+        transform: rotate(20deg);
+    }
+    60%{
+        transform: rotate(-20deg);
+    }
+    100%{
+        transform: rotate(0);
+    }
+
+}
+
+.fullheader{
+    position: relative;
+    margin-top:4rem;
+    background-color: black;
+    padding-top: 2rem;
+    display: flex;
+    font-size: 1.4rem;
+    flex-direction: column;
+    align-items: center;
+    z-index:2;
+    .hd-link{
+        padding: 2rem 0;
+    }
+}
+
+.hd-container{
+    position: fixed;
+    top: 0%;
+    z-index: 10;
+    width: 100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #3AAFA9;
+    padding: 1rem 1rem;
+
+    .hd-hide{
+        @media (max-width:'400px') {
+            display: none;
+        }
+    }
+
+    .hd-menu{
+        display: block;
+        @media (min-width:'400px') {
+            display: none;
+        }
+    }
+
+    .hd-logo{
+        flex-grow: 1;
+        color: white;
+        font-weight: 700;
+    }
+
+    .hd-link{
+        text-decoration: none;
+        padding: 0 1rem;
+        font-size: 1.5rem;
+        color: white;
+        font-weight: 500;
+
+        i{
+            animation-duration: 900ms;
+        animation-iteration-count: infinite;
+        &:hover{
+           animation-name: HomeLinkAnimation;
+           animation-timing-function: ease;
+        }
+        }
+        
+    }
+
+}

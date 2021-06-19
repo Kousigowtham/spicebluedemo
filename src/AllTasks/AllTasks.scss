@@ -1,0 +1,35 @@
+.tks-container{
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    margin-top: 4rem;
+    background-image: url(../Assets/TaskCartoon.png);
+    background-color: rgba(34, 165, 197, 0.2);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-attachment: fixed;
+    background-position: right bottom;
+    padding: 1rem 0;
+}
+
+.noRec-container{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    margin: 3rem 0;
+    height: 250px;
+    background-image: url(../Assets/NoRecords.png);
+    background-repeat: no-repeat;
+    background-position: center  center;
+    background-size: contain;
+    p{  
+        position: absolute;
+        font-size: 1.5rem;
+        margin-bottom: 0rem;
+        font-weight: 500;
+        bottom: -30px;
+    }
+}

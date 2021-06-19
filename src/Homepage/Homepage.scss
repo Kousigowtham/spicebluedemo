@@ -1,0 +1,55 @@
+
+.bdy-bg{
+    background-image: url(../Assets/homebg6.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    min-height: 100%;
+    min-width: 100%;
+    background-size: cover;
+
+    .bdy-bg2{
+        position: relative;
+        background-color: rgba(66, 55, 143, 0.1);
+        background-image: linear-gradient(315deg, rgba(66, 55, 143, 0.5) 0%, rgba(245, 56, 68, 0.5) 74%);
+        background-repeat: no-repeat;
+        background-position: center;
+        position: fixed;
+        min-height: 100%;
+        min-width: 100%;
+        background-size: cover;
+    }
+
+    .bdy-container{
+        opacity: 1;
+        position: absolute;
+        margin-bottom: 6rem;
+        font-weight: 800;
+        bottom: 0%;
+        display: flex;
+        color:#3AAFA9;
+        font-size: 2.5rem;
+        @media (max-width:'500px') {
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+
+        p{
+            margin: 0;
+            padding: 0 1rem;
+            max-width: 600px;
+            span{
+                font-size: 10rem;
+                color: black;
+                @media (max-width:'700px') {
+                
+                    font-size: 5rem;
+                }
+            }
+          
+            
+
+        }
+    }
+}

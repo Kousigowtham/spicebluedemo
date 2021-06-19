@@ -1,0 +1,23 @@
+.btn{
+    box-sizing: border-box;
+    border: 1px solid #17252A;
+    border-radius: 2rem;
+    padding: 0.5em 1.5em;
+    margin: 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #17252A;
+    color:white;
+
+    &:hover{
+
+        cursor: pointer;
+        background-color: white;
+        color: #17252A;
+    }
+
+    &:active{
+        background-color:#17252A ;
+        color: white;
+    }
+}
