@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useCallback} from 'react';
 import {Route,Switch,Redirect} from 'react-router-dom';
 import Homepage from './Homepage/Homepage';
 import Header from './Header/Header';
@@ -12,13 +12,10 @@ import TaskPage from './Taskpage/TaskPage';
 function App({setCurrentUser,setCurrentUserDetails,setTeamDetails,currentUser}) {
 
 
-useEffect(() => {
 
-  let userData = JSON.parse(localStorage.getItem('currentUser'));
-  if(userData !== null && currentUser ===null )
-  {
-  
-  setCurrentUser(userData);
+const fetchCurrentuser =useCallback(
+  (userData) => {
+    setCurrentUser(userData);
   fetch('https://stage.api.sloovi.com/user',{
     method:'GET',
     headers : {
@@ -28,9 +25,13 @@ useEffect(() => {
       }
 }).then(response=>response.json()).then(data=>{
   setCurrentUserDetails(data.results)
-})  
+})
+  },[setCurrentUser,setCurrentUserDetails])
 
-fetch('https://stage.api.sloovi.com/team',{
+
+const fetchTeam = useCallback(
+  (userData) => {
+    fetch('https://stage.api.sloovi.com/team',{
   method:'GET',
   headers : {
     'Authorization': 'Bearer ' + userData.token,
@@ -41,8 +42,19 @@ fetch('https://stage.api.sloovi.com/team',{
   setTeamDetails(data.results)
   console.log(data.results)
 })
+  },[setTeamDetails])
+
+useEffect(() => {
+
+  let userData = JSON.parse(localStorage.getItem('currentUser'));
+  if(userData !== null && currentUser ===null )
+  {
+  
+    fetchCurrentuser(userData);
+    fetchTeam(userData);
+
   }
-}, [currentUser])
+}, [currentUser,fetchTeam,fetchCurrentuser])
 
   return (
       <React.Fragment>

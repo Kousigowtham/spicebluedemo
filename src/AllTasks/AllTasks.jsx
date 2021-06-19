@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useCallback} from 'react'
 import './AllTasks.scss'
 import {connect} from 'react-redux';
 import {getTaskDetails} from '../Redux/TaskReducer/TaskAction'
@@ -40,14 +40,9 @@ const AllTasks = ({tasks,currentUser,getTaskDetails}) => {
     }
 }
 
-    useEffect(()=>{
-        
-      if(currentUser === null || currentUser === undefined)
-          history.push('/login');
-
-        if(currentUser !== null )
-        {
-        fetch('https://stage.api.sloovi.com/task/lead_6996a7dcdddc4af3b4f71ccb985cea38',{
+const fetchLead= useCallback(
+  () => {
+    fetch('https://stage.api.sloovi.com/task/lead_6996a7dcdddc4af3b4f71ccb985cea38',{
             method:'GET',
             headers : {
                 'Authorization': 'Bearer ' + currentUser.token,
@@ -57,8 +52,24 @@ const AllTasks = ({tasks,currentUser,getTaskDetails}) => {
         }).then(response=>response.json()).then(data=>{
             getTaskDetails(data.results)
         })
+  },[getTaskDetails,currentUser])
+
+const GoBackLogin = useCallback(
+  () => {
+    history.push('/login')
+  },
+  [history])
+
+    useEffect(()=>{
+        
+      if(currentUser === null || currentUser === undefined)
+          GoBackLogin();
+
+        if(currentUser !== null )
+        {
+          fetchLead();
     }
-    },[])
+    },[fetchLead,currentUser,GoBackLogin])
  
 
 

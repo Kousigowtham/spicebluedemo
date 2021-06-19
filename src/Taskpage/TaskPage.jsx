@@ -1,10 +1,11 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import './Taskpage.scss'
 import AddModal from '../Customs/AddModal/AddModal';
+import {connect} from 'react-redux'
 
 
-const TaskPage = () => {
+const TaskPage = ({team}) => {
     
   const [open, setopen] = useState(false);
 
@@ -24,5 +25,7 @@ const TaskPage = () => {
     )
 }
 
-
-export default TaskPage
+const mapsStateToProps = state =>({
+  team: state.team.teamDetails
+})
+export default connect(mapsStateToProps)(TaskPage)

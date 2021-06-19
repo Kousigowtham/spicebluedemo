@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import {connect} from 'react-redux';
 import {setCurrentUser} from '../Redux/UserReducer/userAction'
+import {setTeamDetails} from '../Redux/TeamReducer/TeamAction'
 import CustomButton from '../Customs/CustomButton/CustomButton'
 import './Loginpage.scss'
 import {useHistory} from 'react-router'
 
 
-const Loginpage = ({setCurrentUser}) => {
+const Loginpage = ({setCurrentUser,setTeamDetails}) => {
 
     let history = useHistory();
     const [userData, setuserData] = useState({email:'',
@@ -32,6 +33,18 @@ const Loginpage = ({setCurrentUser}) => {
 
                     localStorage.setItem('currentUser',JSON.stringify({...userData, loginStatus:true, token: data.results.token}));
                     setCurrentUser({...userData, loginStatus:true, token: data.results.token});
+                    
+                    fetch('https://stage.api.sloovi.com/team',{
+                        method:'GET',
+                        headers : {
+                          'Authorization': 'Bearer ' + data.results.token,
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json',          
+                        }
+                      }).then(res=>res.json()).then(d=>{
+                        setTeamDetails(d.results)})
+
+
                 }
                 })
     }
@@ -67,6 +80,7 @@ const Loginpage = ({setCurrentUser}) => {
 
 const mapDispatchToProps= dispatch =>({
 
-    setCurrentUser : user => dispatch(setCurrentUser(user))
+    setCurrentUser : user => dispatch(setCurrentUser(user)),
+    setTeamDetails : teamDetails => dispatch(setTeamDetails(teamDetails))
 })
 export default connect(null,mapDispatchToProps)(Loginpage)

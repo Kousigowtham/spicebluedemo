@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useCallback} from 'react'
 import ReactDOM from 'react-dom'
 import {connect} from 'react-redux'
 import CustomButton from '../CustomButton/CustomButton'
@@ -10,7 +10,7 @@ import {getTaskDetails} from '../../Redux/TaskReducer/TaskAction'
 
 const AddModal = ({currentUser,closeHandler,team,task,getTaskDetails,httpMethod,handlerType}) => {
 
-    const assin_userList=team.data.filter(x=>x.user_status === 'accepted');
+    const [agnUserList, setagnUserList] = useState(null);
     const [taskData, settaskData] = useState({
         desc:'',
         date: '',
@@ -90,9 +90,11 @@ const AddModal = ({currentUser,closeHandler,team,task,getTaskDetails,httpMethod,
         alert(`Successfully ${httpMethod==='PUT'? 'updated' : 'added'} the task`);
     }
 
-    useEffect(() => {
+    const gettingUserByName = useCallback(
+        () => {
+            if(team !== null)
+            setagnUserList(team.data.filter(x=>x.user_status === 'accepted'));
 
-        console.log(handlerType)
         if(task !== null && task !== undefined)
         {
 
@@ -114,31 +116,38 @@ const AddModal = ({currentUser,closeHandler,team,task,getTaskDetails,httpMethod,
                     break;
                 }
                 
-            }
+            }   
+  
             document.getElementById("assignedUser").selectedIndex = count ===-1 ? '0' : count ;
+        
+             //convert seconds to time
+         var time= task.task_time;
+         var hrs= Math.floor(time/3600);
+         var mins= time%60;
+         if(mins>= 15 && mins <= 45 ){mins=30}else{mins=0}
+         var DayorNyt='';
+         if(hrs >12) {hrs=hrs-12; DayorNyt='PM';}else{DayorNyt='AM'}
+         if(mins ===0 ) { mins='0'+ mins}
+         if(hrs <10){hrs='0'+ hrs}
 
-            //convert seconds to time
-            var time= task.task_time;
-            var hrs= Math.floor(time/3600);
-            var mins= time%60;
-            if(mins>= 15 && mins <= 45 ){mins=30}else{mins=0}
-            var DayorNyt='';
-            if(hrs >12) {hrs=hrs-12; DayorNyt='PM';}else{DayorNyt='AM'}
-            if(mins ===0 ) { mins='0'+ mins}
-            if(hrs <10){hrs='0'+ hrs}
-
-            var finalTime= hrs +':'+ mins + ' ' + DayorNyt;
-            settaskData({
-                    desc: task.task_msg,
-                    date: task.task_date,
-                    time: finalTime,
-                    assignedUser:agn_user,
-                    isCompleted: task.is_completed
-            });
-            settimelabel(finalTime);
-
+         var finalTime= hrs +':'+ mins + ' ' + DayorNyt;
+         settaskData({
+                 desc: task.task_msg,
+                 date: task.task_date,
+                 time: finalTime,
+                 assignedUser:agn_user,
+                 isCompleted: task.is_completed
+         });
+         settimelabel(finalTime);
         }
-    }, [])
+        
+
+    },[task,team])
+
+    useEffect(() => {
+
+            gettingUserByName();
+    }, [gettingUserByName])
 
     return ReactDOM.createPortal(
         <React.Fragment>
@@ -172,12 +181,13 @@ const AddModal = ({currentUser,closeHandler,team,task,getTaskDetails,httpMethod,
                             <select name='assignedUser' disabled= {handlerType } id='assignedUser' onChange={changeHandler}>
                                 <option value=''>--please select an option--</option>
                                 {
-                                    assin_userList.map((t)=>(
-                                        
-                                        <option name={t.name} value={t.user_id}>{t.name}</option>
-                                        
-                                    ))
                                     
+                                    (agnUserList !== null && agnUserList !== undefined) ?
+                                    agnUserList.map((t)=>(
+                                        
+                                        <option key={t.user_id} name={t.name} value={t.user_id}>{t.name}</option>
+                                        
+                                    )) : null
                                 }
                             </select>
                         </div>
