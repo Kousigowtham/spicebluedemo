@@ -58,7 +58,7 @@ const AllTasks = ({tasks,currentUser,getTaskDetails}) => {
             getTaskDetails(data.results)
         })
     }
-    },[currentUser])
+    },[])
  
 
 
